@@ -14,3 +14,15 @@ chiki/**/*.csv
 # Ignorar el JSON grande (141MB) y temporales de Excel
 datos_consolidados/todos_registros.json
 datos_consolidados/~*
+
+# Consolidator: maestro SQLite regenerable y salidas de cada corrida
+consolidator/master.db
+consolidator/out/
+
+# Python bytecode y entorno virtual
+__pycache__/
+*.pyc
+.venv/
+
+# Variables de entorno (la plantilla .env.example SÍ se versiona)
+.env
