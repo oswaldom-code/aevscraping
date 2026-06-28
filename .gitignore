@@ -1,12 +1,16 @@
-# Ignorar carpetas de datos consolidados y logs
-datos_consolidados/
+# Ignorar logs
 logs/
 
-# Ignorar bases de datos locales y archivos de datos pesados (.json, .csv, .xlsx, .rar)
-**/*.json
-**/*.csv
-**/*.xlsx
-**/*.rar
+# Ignorar bases de datos locales y archivos de datos temporales en scrapers
+Amilkir/**/*.json
+Amilkir/**/*.csv
+chiki/**/*.json
+chiki/**/*.csv
 
 # Conservar esquemas de BBDD que son archivos de configuración pequeños
 !**/esquema-bbdd-sos-json*.json
+
+# Para la carpeta de datos consolidados:
+# Ignorar el JSON grande (141MB) y temporales de Excel
+datos_consolidados/todos_registros.json
+datos_consolidados/~*

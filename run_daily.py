@@ -11,6 +11,7 @@ Programado:  configurar con setup_tarea_diaria.ps1
 import subprocess
 import sys
 import json
+import zipfile
 from pathlib import Path
 from datetime import datetime, timezone
 
@@ -90,6 +91,27 @@ def merge_all():
     return len(all_records)
 
 
+def compress_json():
+    """Comprime el archivo JSON consolidado en un archivo ZIP para ahorrar espacio y cumplir límites."""
+    todos_path = DATOS / "todos_registros.json"
+    zip_path = DATOS / "todos_registros.zip"
+    if not todos_path.exists():
+        log(f"Advertencia: No se encontró {todos_path.name} para comprimir")
+        return False
+    try:
+        log(f"Comprimiendo {todos_path.name} a {zip_path.name}...")
+        t0 = datetime.now(timezone.utc)
+        with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as zipf:
+            zipf.write(todos_path, arcname=todos_path.name)
+        elapsed = (datetime.now(timezone.utc) - t0).total_seconds()
+        size_mb = zip_path.stat().st_size / (1024 * 1024)
+        log(f"OK: ZIP generado ({size_mb:.2f} MB) en {elapsed:.1f}s")
+        return True
+    except Exception as e:
+        log(f"Error al comprimir a ZIP: {e}")
+        return False
+
+
 def save_log():
     LOGS.mkdir(exist_ok=True)
     date_str  = datetime.now(timezone.utc).strftime("%Y-%m-%d")
@@ -148,6 +170,9 @@ def main():
     # 6. Consolidar todos los datos
     log("Consolidando datos de todas las fuentes...")
     merge_all()
+
+    # 6.5. Comprimir JSON a ZIP
+    compress_json()
 
     # 7. Generar XLSX
     ok_xlsx = run_step(
