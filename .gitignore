@@ -6,6 +6,11 @@ Amilkir/**/*.json
 Amilkir/**/*.csv
 chiki/**/*.json
 chiki/**/*.csv
+scrapers/**/*.json
+scrapers/**/*.csv
+scrapers/**/*.jsonl
+
+!scrapers/venezuelareporta/venezuelareporta.jsonl
 
 # Conservar esquemas de BBDD que son archivos de configuración pequeños
 !**/esquema-bbdd-sos-json*.json

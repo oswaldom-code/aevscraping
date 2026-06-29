@@ -45,6 +45,8 @@ SCRAPERS = [
                                  "--output", "localizados_redayudavenezuela"], REPO / "chiki"),
     ("terremoto",               ["python3", "scraper_terremoto.py"], REPO / "chiki"),
     ("terremoto (parse)",       ["python3", "parse_desaparecidos.py"], REPO / "chiki"),
+    ("sosvenezuela2026",        ["python3", "scraper.py"], REPO / "scrapers" / "sosvenezuela2026"),
+    ("venezuelareporta",        ["python3", "scraper.py"], REPO / "scrapers" / "venezuelareporta"),
 ]
 
 # Salidas .json a ingerir tras el scrape.
@@ -54,6 +56,8 @@ INGEST = [
     REPO / "chiki" / "localizados_redayudavenezuela.json",
     REPO / "chiki" / "personas_desaparecidas_venezuela_parsed.json",
     REPO / "chiki" / "pacientes_hospitalizados.json",
+    REPO / "scrapers" / "sosvenezuela2026" / "sosvenezuela2026.json",
+    REPO / "scrapers" / "venezuelareporta" / "venezuelareporta.json",
 ]
 
 
